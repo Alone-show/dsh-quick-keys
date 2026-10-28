@@ -89,7 +89,9 @@ docs/              实现说明（为什么这么写、怎么改键、诊断字�
 ```
 
 改图标：编辑 `icon.svg`，再跑 `python3 scripts/make-icon.py` 重新生成
-`assets/icon-180.png`（需要 Pillow）。
+`assets/icon-{512,180,64}.png`。脚本会自动找本机的 SVG 渲染器（cairosvg /
+resvg / rsvg-convert / inkscape 任一），再用 Pillow 缩放；仓库里已提交生成好的
+PNG，不改图标就不用跑。
 
 **实现细节都写在 [docs/DEVELOPMENT.md](https://github.com/Alone-show/dsh-quick-keys/blob/main/docs/DEVELOPMENT.md)**
 ——包括按键为什么这么处理、按键判定的范围、怎么改绑按键，以及诊断字段的含义。

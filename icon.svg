@@ -1,53 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="dsh-quick-keys">
-  <!-- dsh-quick-keys：科技灰底 + 立体键帽（面 / 侧裙 / 投影三层），键面 » 表示快捷键与「快」 -->
+  <title>dsh-quick-keys</title>
+  <desc>立体等轴测方形键帽：顶面与左右前侧面构成体积，顶面内缩碟形凹盘，键面印 Tab 字形。</desc>
   <defs>
-    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#4A525C"/>
-      <stop offset="1" stop-color="#171B21"/>
+    <linearGradient id="tile" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#2E3F73"/>
+      <stop offset="1" stop-color="#0B1226"/>
     </linearGradient>
+    <linearGradient id="dish" x1="0.1" y1="0" x2="0.45" y2="1">
+      <stop offset="0" stop-color="#D8E1EF"/>
+      <stop offset="1" stop-color="#F2F6FC"/>
+    </linearGradient>
+    <path id="cap" d="M 236.3 96.8 Q 256.0 87.0 275.7 96.8 L 416.3 167.2 Q 436.0 177.0 439.5 198.7 L 453.5 285.3 Q 457.6 311.0 434.3 322.6 L 279.3 400.2 Q 256.0 411.8 232.7 400.2 L 77.7 322.6 Q 54.4 311.0 58.5 285.3 L 72.5 198.7 Q 76.0 177.0 95.7 167.2 Z"/>
+    <path id="plate" d="M 236.3 96.8 Q 256.0 87.0 275.7 96.8 L 416.3 167.2 Q 436.0 177.0 416.3 186.8 L 272.1 259.0 Q 256.0 267.0 239.9 259.0 L 95.7 186.8 Q 76.0 177.0 95.7 167.2 Z"/>
+    <path id="dishInset" d="M 238.6 107.7 Q 256.0 99.0 273.4 107.7 L 394.7 168.3 Q 412.1 177.0 394.7 185.7 L 273.4 246.3 Q 256.0 255.0 238.6 246.3 L 117.3 185.7 Q 99.9 177.0 117.3 168.3 Z"/>
+    <path id="wallLeft" d="M 69.5 174.3 L 256.0 274.0 L 256.0 418.8 L 47.7 313.0 Z"/>
+    <path id="wallRight" d="M 256.0 274.0 L 442.5 174.3 L 464.3 313.0 L 256.0 418.8 Z"/>
     <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#C6D0DB" stop-opacity="0.24"/>
-      <stop offset="1" stop-color="#C6D0DB" stop-opacity="0"/>
+      <stop offset="0" stop-color="#4D6BFE" stop-opacity="0.2"/>
+      <stop offset="0.55" stop-color="#4D6BFE" stop-opacity="0.090"/>
+      <stop offset="1" stop-color="#4D6BFE" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#707882"/>
-      <stop offset="1" stop-color="#2C3138"/>
-    </linearGradient>
-    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F5F7FA"/>
-      <stop offset="1" stop-color="#D6DCE4"/>
-    </linearGradient>
-    <linearGradient id="faceShade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#181C22" stop-opacity="0"/>
-      <stop offset="1" stop-color="#181C22" stop-opacity="0.13"/>
-    </linearGradient>
-    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="10"/>
-    </filter>
-    <filter id="glowBlur" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="28"/>
-    </filter>
+    <radialGradient id="shadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#03060C" stop-opacity="0.743"/>
+      <stop offset="0.42" stop-color="#03060C" stop-opacity="0.341"/>
+      <stop offset="0.78" stop-color="#03060C" stop-opacity="0.099"/>
+      <stop offset="1" stop-color="#03060C" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="capClip"><path d="M 236.3 96.8 Q 256.0 87.0 275.7 96.8 L 416.3 167.2 Q 436.0 177.0 439.5 198.7 L 453.5 285.3 Q 457.6 311.0 434.3 322.6 L 279.3 400.2 Q 256.0 411.8 232.7 400.2 L 77.7 322.6 Q 54.4 311.0 58.5 285.3 L 72.5 198.7 Q 76.0 177.0 95.7 167.2 Z"/></clipPath>
   </defs>
 
-  <!-- 底板：科技灰渐变 -->
-  <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#tile)"/>
-  <ellipse cx="256" cy="236" rx="130" ry="140" fill="url(#glow)" filter="url(#glowBlur)"/>
+  <!-- 底板 -->
+  <rect width="512" height="512" rx="112" fill="url(#tile)"/>
+  <ellipse cx="256" cy="273" rx="214" ry="206" fill="url(#glow)"/>
 
-  <!-- 投影 -->
-  <rect x="110" y="208" width="292" height="176" rx="48" fill="#03060A" opacity="0.55" filter="url(#soft)"/>
+  <!-- 落地投影 -->
+  <ellipse cx="256" cy="424" rx="169" ry="60" fill="url(#shadow)"/>
+  <ellipse cx="256" cy="408" rx="133" ry="26" fill="url(#shadow)" opacity="0.75"/>
 
-  <!-- 侧裙（键帽厚度） -->
-  <rect x="110" y="204" width="292" height="176" rx="48" fill="url(#wall)"/>
+  <g clip-path="url(#capClip)">
+    <!-- 左右前侧面 -->
+    <use href="#cap" fill="#9FB2CB"/>
+    <use href="#wallLeft" fill="#9FB2CB"/>
+    <use href="#wallRight" fill="#5F7189"/>
+    <!-- 中缝 -->
+    <path d="M 256 267.0 V 411.8" fill="none" stroke="#0A1120" stroke-opacity="0.22" stroke-width="2.5"/>
+    <!-- 裙边 -->
+    <path d="M 57.6 291.0 L 256.0 390.2 L 454.4 291.0" fill="none" stroke="#0A1020" stroke-opacity="0.28" stroke-width="2.4"/>
+    <path d="M 57.6 291.0 L 256.0 390.2 L 454.4 291.0 L 457.6 411.8 L 54.4 411.8 Z" fill="#0A1020" fill-opacity="0.12"/>
+    <!-- 键帽面板 + 碟形凹盘 -->
+    <use href="#plate" fill="#FFFFFF"/>
+    <use href="#dishInset" fill="url(#dish)"/>
+    <path d="M 101.3 188.0 L 236.2 261.1 Q 256.0 267.0 275.8 261.1 L 410.7 188.0" fill="none" stroke="#0A1120" stroke-opacity="0.10" stroke-width="8"/>
+    <path d="M 101.3 188.0 L 236.2 261.1 Q 256.0 267.0 275.8 261.1 L 410.7 188.0" fill="none" stroke="#0A1120" stroke-opacity="0.22" stroke-width="2.2"/>
+  </g>
+  <!-- 外缘细线，让键帽从底板上立起来 -->
+  <use href="#cap" fill="none" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="1.5"/>
 
-  <!-- 键面 -->
-  <rect x="110" y="172" width="292" height="176" rx="48" fill="url(#face)"/>
-  <rect x="110" y="172" width="292" height="176" rx="48" fill="url(#faceShade)"/>
-  <!-- 顶部高光 -->
-  <rect x="136" y="178" width="240" height="10" rx="5" fill="#FFFFFF" opacity="0.6"/>
-
-  <!-- » -->
-  <g fill="none" stroke="#2B3037" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M216 218 L254 260 L216 302"/>
-    <path d="M258 218 L296 260 L258 302"/>
+  <!-- 键面字形 -->
+  <g transform="translate(256,177.0) scale(95.40)" fill="none" stroke="#0E1B47" stroke-width="0.155" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M -0.66 0 H 0.24"/>
+    <path d="M -0.06 -0.34 L 0.28 0 L -0.06 0.34"/>
+    <path d="M 0.60 -0.46 V 0.46"/>
   </g>
 </svg>
