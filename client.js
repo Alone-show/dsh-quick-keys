@@ -17,9 +17,9 @@
  *        且不在输入控件上 → 也处理；其余（侧边栏、弹窗、终端、对话区外的
  *        输入框）一律放行。
  *
- * 诊断面：本文件在 window 上挂一个 `window.__DSH_QUICK_ACTIONS__`，记录最近
+ * 诊断面：本文件在 window 上挂一个 `window.__DSH_QUICK_KEYS__`，记录最近
  * 几次 Tab 按键的判定依据和切换结果。Shift+Tab 不生效时，在控制台执行
- * `__DSH_QUICK_ACTIONS__.report()` 就能看出是"没装上""被哪个守卫判掉"
+ * `__DSH_QUICK_KEYS__.report()` 就能看出是"没装上""被哪个守卫判掉"
  * 还是"命令发出去但失败了"。
  */
 window.__ModuleLoader__.load({
@@ -135,8 +135,6 @@ window.__ModuleLoader__.load({
     };
     try {
       window.__DSH_QUICK_KEYS__ = diagnostics;
-      // 旧名字保留为别名：早期版本用 __DSH_QUICK_ACTIONS__ 排查过问题。
-      window.__DSH_QUICK_ACTIONS__ = diagnostics;
     } catch (error) {
       /* 极老环境挂不上就算了，不影响功能 */
     }

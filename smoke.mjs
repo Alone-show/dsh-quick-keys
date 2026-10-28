@@ -8,7 +8,7 @@
  *   3. 用假 window.addEventListener 捕获**捕获阶段**的 keydown 监听，跑守卫矩阵
  *      （对话区外、弹窗、终端、长按、输入法、组合键、无会话、侧边栏输入框）；
  *   4. 校验切换计划模式时发出的命令（/plan 与 /plan off）与失败兜底；
- *   5. 校验诊断面 `window.__DSH_QUICK_ACTIONS__`（版本 / mounted / 判定依据 / 切换结果）；
+ *   5. 校验诊断面 `window.__DSH_QUICK_KEYS__`（版本 / mounted / 判定依据 / 切换结果）；
  *   6. 校验卸载时用同一函数 + 同一捕获标记 removeEventListener。
  *
  * 特别断言：不能依赖 shortcuts.observeFixedInput —— 那是冒泡阶段，会输给 Lexical
