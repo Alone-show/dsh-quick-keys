@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "快捷按键",
+    "description": "在 / 命令菜单里加 /new（新建对话），并用 Shift+Tab 一键切换计划模式。"
+  }
+}

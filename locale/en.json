@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Quick actions",
+    "description": "Adds /new (start a new conversation) to the slash menu and Shift+Tab to toggle plan mode."
+  }
+}

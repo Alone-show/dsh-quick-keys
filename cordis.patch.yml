@@ -1,0 +1,8 @@
+# 把 dsh-quick-keys 挂进 profile 的 Loader。
+#
+# 宿主半侧是空壳（index.js 只有 apply()），这个条目存在的意义是让本包成为
+# Loader 条目，从而让客户端的模块表（dsh-client-modules）扫到 package.json 的
+# dsh.client 声明并把 client.js 下发给浏览器。
+- insert:
+    - id: quick-keys
+      name: 'dsh-quick-keys'
