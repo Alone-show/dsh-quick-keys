@@ -28,10 +28,17 @@ GRID = 512
 TILE_TOP = (168, 175, 184)
 TILE_BOTTOM = (94, 100, 108)
 NEAR_WHITE = (248, 250, 252)
-FACE_TOP = (255, 255, 255)
-FACE_BOTTOM = (231, 235, 240)
+FACE_TOP = (244, 246, 249)
+FACE_BOTTOM = (214, 220, 228)
 SKIRT = (73, 79, 86)
 GRAPHITE = (46, 51, 57)
+
+# 科技灰：冷调深灰底 + 背后柔光
+TECH_TOP = (74, 82, 92)
+TECH_BOTTOM = (23, 27, 33)
+GLOW = (198, 208, 219)
+SKIRT_TOP = (112, 120, 130)
+SKIRT_BOTTOM = (44, 49, 57)
 
 
 def build(variant: str, size: int) -> Image.Image:
@@ -58,9 +65,9 @@ def build(variant: str, size: int) -> Image.Image:
     canvas.paste(gradient, (0, 0), mask)
 
     # ── 键帽几何 ──────────────────────────────────────────────────────────
-    key = [s(116), s(176), s(396), s(346)]
-    key_radius = round(s(46))
-    chevron_center = (s(256), s(261))
+    key = [s(110), s(172), s(402), s(348)]
+    key_radius = round(s(48))
+    chevron_center = (s(256), s(260))
     chevron_height = s(84)
     chevron_depth = s(38)
     chevron_gap = s(42)
@@ -80,7 +87,78 @@ def build(variant: str, size: int) -> Image.Image:
             for cx, cy in (points[0], points[-1]):
                 pen.ellipse([cx - radius, cy - radius, cx + radius, cy + radius], fill=color)
 
-    if variant == "c1":
+    if variant == "c3":
+        # 科技灰底：冷调深灰渐变 + 背后柔光，键帽立体感更强
+        tech = Image.new("RGBA", (size, size))
+        pen = ImageDraw.Draw(tech)
+        for y in range(size):
+            mix = y / max(1, size - 1)
+            color = tuple(round(a + (b - a) * mix) for a, b in zip(TECH_TOP, TECH_BOTTOM))
+            pen.line([(0, y), (size, y)], fill=color + (255,))
+        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        canvas.paste(tech, (0, 0), mask)
+
+        # 背后的柔光，把键帽从底上托起来
+        glow = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        ImageDraw.Draw(glow).ellipse(
+            [s(126), s(96), s(386), s(376)], fill=GLOW + (62,)
+        )
+        canvas.alpha_composite(glow.filter(ImageFilter.GaussianBlur(radius=max(1, s(54)))))
+
+        # 投影
+        shadow = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        ImageDraw.Draw(shadow).rounded_rectangle(
+            [key[0], key[1] + s(36), key[2], key[3] + s(36)],
+            radius=key_radius,
+            fill=(3, 5, 7, 150),
+        )
+        canvas.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(radius=max(1, s(15)))))
+
+        # 侧裙（带渐变，做出厚度）
+        skirt = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        skirt_draw = ImageDraw.Draw(skirt)
+        top_y, bottom_y = key[1] + s(32), key[3] + s(32)
+        for y in range(int(top_y), int(bottom_y) + 1):
+            mix = (y - top_y) / max(1, bottom_y - top_y)
+            color = tuple(round(a + (b - a) * mix) for a, b in zip(SKIRT_TOP, SKIRT_BOTTOM))
+            skirt_draw.line([(key[0], y), (key[2], y)], fill=color + (255,))
+        skirt_mask = Image.new("L", (size, size), 0)
+        ImageDraw.Draw(skirt_mask).rounded_rectangle(
+            [key[0], key[1] + s(32), key[2], key[3] + s(32)], radius=key_radius, fill=255
+        )
+        canvas.paste(skirt, (0, 0), skirt_mask)
+
+        # 键面：白→浅灰渐变 + 顶部高光
+        face = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        face_draw = ImageDraw.Draw(face)
+        for y in range(int(key[1]), int(key[3]) + 1):
+            mix = (y - key[1]) / max(1, key[3] - key[1])
+            color = tuple(round(a + (b - a) * mix) for a, b in zip(FACE_TOP, FACE_BOTTOM))
+            face_draw.line([(key[0], y), (key[2], y)], fill=color + (255,))
+        face_mask = Image.new("L", (size, size), 0)
+        ImageDraw.Draw(face_mask).rounded_rectangle(key, radius=key_radius, fill=255)
+        canvas.paste(face, (0, 0), face_mask)
+
+        # 键面底部的淡内阴影，键面看起来是向下收的弧面
+        inner = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        inner_draw = ImageDraw.Draw(inner)
+        inner_top = key[3] - s(56)
+        for y in range(int(inner_top), int(key[3]) + 1):
+            mix = (y - inner_top) / max(1, key[3] - inner_top)
+            inner_draw.line([(key[0], y), (key[2], y)], fill=(24, 28, 34, round(34 * mix)))
+        inner_mask = Image.new("L", (size, size), 0)
+        ImageDraw.Draw(inner_mask).rounded_rectangle(key, radius=key_radius, fill=255)
+        canvas.paste(inner, (0, 0), Image.composite(inner_mask, Image.new("L", (size, size), 0), face_mask))
+
+        # 顶部一道细高光，强化「凸起」
+        ImageDraw.Draw(canvas).rounded_rectangle(
+            [key[0] + s(26), key[1] + s(6), key[2] - s(26), key[1] + s(16)],
+            radius=round(s(6)),
+            fill=(255, 255, 255, 150),
+        )
+
+        chevrons(canvas, GRAPHITE + (255,))
+    elif variant == "c1":
         # 平面：白色键帽描边 + 白色 chevrons，最简
         ImageDraw.Draw(canvas).rounded_rectangle(
             key, radius=key_radius, outline=NEAR_WHITE + (255,), width=px(24)
@@ -121,7 +199,8 @@ def build(variant: str, size: int) -> Image.Image:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="生成 dsh-quick-keys 图标位图")
-    parser.add_argument("--variant", choices=("c1", "c2"), default="c2", help="c1=平面，c2=微立体")
+    parser.add_argument("--variant", choices=("c1", "c2", "c3"), default="c3",
+                        help="c1=平面，c2=浅灰底微立体，c3=科技灰底立体键帽")
     parser.add_argument("--size", type=int, default=180, help="输出边长（默认 180）")
     parser.add_argument("--out", type=Path, help="输出路径；缺省写 assets/icon-<size>.png")
     parser.add_argument("--preview", action="store_true", help="额外生成 96px 预览")

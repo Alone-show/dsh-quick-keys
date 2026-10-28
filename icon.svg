@@ -1,29 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="dsh-quick-keys">
-  <!-- dsh-quick-keys：灰色调键帽 + »（快捷键 + 快），无文字无角标 -->
+  <!-- dsh-quick-keys：科技灰底 + 立体键帽（面 / 侧裙 / 投影三层），键面 » 表示快捷键与「快」 -->
   <defs>
     <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#A8AFB8"/>
-      <stop offset="1" stop-color="#5E646C"/>
+      <stop offset="0" stop-color="#4A525C"/>
+      <stop offset="1" stop-color="#171B21"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#C6D0DB" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#C6D0DB" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#707882"/>
+      <stop offset="1" stop-color="#2C3138"/>
     </linearGradient>
     <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#E7EBF0"/>
+      <stop offset="0" stop-color="#F5F7FA"/>
+      <stop offset="1" stop-color="#D6DCE4"/>
     </linearGradient>
+    <linearGradient id="faceShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#181C22" stop-opacity="0"/>
+      <stop offset="1" stop-color="#181C22" stop-opacity="0.13"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="glowBlur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
   </defs>
 
-  <!-- 底板 -->
+  <!-- 底板：科技灰渐变 -->
   <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#tile)"/>
+  <ellipse cx="256" cy="236" rx="130" ry="140" fill="url(#glow)" filter="url(#glowBlur)"/>
 
-  <!-- 键帽阴影（近似柔化，不依赖 filter） -->
-  <rect x="116" y="196" width="280" height="170" rx="46" fill="#1E2227" opacity="0.18"/>
+  <!-- 投影 -->
+  <rect x="110" y="208" width="292" height="176" rx="48" fill="#03060A" opacity="0.55" filter="url(#soft)"/>
 
-  <!-- 键帽侧裙 + 键面 -->
-  <rect x="116" y="194" width="280" height="170" rx="46" fill="#495056"/>
-  <rect x="116" y="176" width="280" height="170" rx="46" fill="url(#face)"/>
+  <!-- 侧裙（键帽厚度） -->
+  <rect x="110" y="204" width="292" height="176" rx="48" fill="url(#wall)"/>
+
+  <!-- 键面 -->
+  <rect x="110" y="172" width="292" height="176" rx="48" fill="url(#face)"/>
+  <rect x="110" y="172" width="292" height="176" rx="48" fill="url(#faceShade)"/>
+  <!-- 顶部高光 -->
+  <rect x="136" y="178" width="240" height="10" rx="5" fill="#FFFFFF" opacity="0.6"/>
 
   <!-- » -->
-  <g fill="none" stroke="#2E3339" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M216 219 L254 261 L216 303"/>
-    <path d="M258 219 L296 261 L258 303"/>
+  <g fill="none" stroke="#2B3037" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M216 218 L254 260 L216 302"/>
+    <path d="M258 218 L296 260 L258 302"/>
   </g>
 </svg>
