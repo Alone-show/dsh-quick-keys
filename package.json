@@ -1,6 +1,6 @@
 {
   "name": "dsh-quick-keys",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "DSH 插件：/new 命令新建对话，Shift+Tab 一键切换计划模式。",
   "keywords": [
@@ -14,7 +14,8 @@
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
-    "./locale/*.json": "./locale/*.json"
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
   },
   "files": [
     "index.js",
@@ -22,7 +23,9 @@
     "cordis.patch.yml",
     "locale/*.json",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "icon.svg",
+    "assets/*"
   ],
   "dsh": {
     "bundle": {

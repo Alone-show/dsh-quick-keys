@@ -81,9 +81,15 @@ index.js           宿主空壳 apply()
 cordis.patch.yml   把插件插入 profile 的 Loader
 client.js          浏览器半侧：/new 命令贡献 + Shift+Tab 按键监听
 locale/*.json      插件管理页显示的标题与说明
+icon.svg           插件图标（设计源，viewBox 512）
+assets/            catalog 用的位图图标（GitHub 托管，市场卡片取这一张）
+scripts/           图标生成脚本
 smoke.mjs          离线冒烟
 docs/              实现说明（为什么这么写、怎么改键、诊断字段）
 ```
+
+改图标：编辑 `icon.svg`，再跑 `python3 scripts/make-icon.py` 重新生成
+`assets/icon-180.png`（需要 Pillow）。
 
 **实现细节都写在 [docs/DEVELOPMENT.md](https://github.com/Alone-show/dsh-quick-keys/blob/main/docs/DEVELOPMENT.md)**
 ——包括按键为什么这么处理、按键判定的范围、怎么改绑按键，以及诊断字段的含义。

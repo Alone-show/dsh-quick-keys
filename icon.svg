@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="dsh-quick-keys">
+  <!-- dsh-quick-keys：灰色调键帽 + »（快捷键 + 快），无文字无角标 -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A8AFB8"/>
+      <stop offset="1" stop-color="#5E646C"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E7EBF0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 底板 -->
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#tile)"/>
+
+  <!-- 键帽阴影（近似柔化，不依赖 filter） -->
+  <rect x="116" y="196" width="280" height="170" rx="46" fill="#1E2227" opacity="0.18"/>
+
+  <!-- 键帽侧裙 + 键面 -->
+  <rect x="116" y="194" width="280" height="170" rx="46" fill="#495056"/>
+  <rect x="116" y="176" width="280" height="170" rx="46" fill="url(#face)"/>
+
+  <!-- » -->
+  <g fill="none" stroke="#2E3339" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M216 219 L254 261 L216 303"/>
+    <path d="M258 219 L296 261 L258 303"/>
+  </g>
+</svg>
