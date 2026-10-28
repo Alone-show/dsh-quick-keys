@@ -12,20 +12,36 @@
 
 ## 安装
 
-推荐用 DSH 的插件管理器（会同时写 `dependencies` 与 `dsh.profile.bundles` 并热激活）：
+推荐用 DSH 自带的插件管理器装，它会同时写 `dependencies` 与 `dsh.profile.bundles`，装完热激活。
 
-- **GUI**：设置 → 插件 → 安装 → 填 git 链接：
+### 图形界面（推荐）
 
-  ```
-  github:Alone-show/dsh-quick-keys
-  ```
+1. 打开 DSH Web GUI；
+2. 侧边栏点「插件」；
+3. 点「安装」，把仓库地址粘进输入框：
+
+   ```
+   git+ssh://git@github.com/Alone-show/dsh-quick-keys.git
+   ```
+
+4. 点安装，装完刷新一次页面。
+
+本机没配 GitHub SSH key 的话，用 HTTPS 形式，效果一样：
+
+```
+git+https://github.com/Alone-show/dsh-quick-keys.git
+```
+
+也可以直接写短形式 `github:Alone-show/dsh-quick-keys`。
+
+想锁版本就在末尾加标签，例如
+`git+ssh://git@github.com/Alone-show/dsh-quick-keys.git#v1.0.2`。
+
+### 让 agent 装 / CLI
 
 - **让 agent 装**：`plugin_manager` 工具 `install_bundle`，target 同上；
 - **CLI**：`dsh plugin --profile web add github:Alone-show/dsh-quick-keys`
   （只写依赖，需要自己补 `dsh.profile.bundles`，见下）
-
-装完刷新一次页面。想锁版本可以用标签，例如
-`github:Alone-show/dsh-quick-keys#v1.0.0`。
 
 > `dsh plugin --profile web ...` 只是把参数原样转发给 pnpm，**不会**写
 > `dsh.profile.bundles`；所以推荐用 GUI / 插件管理器安装，或按下面手工补全。
