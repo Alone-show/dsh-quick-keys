@@ -37,6 +37,9 @@ git+https://github.com/Alone-show/dsh-quick-keys.git
 想锁版本就在末尾加标签，例如
 `git+ssh://git@github.com/Alone-show/dsh-quick-keys.git#v1.0.2`。
 
+> 本仓库的插件就在 `main` 根目录，所以地址后面不需要带 `#分支` 或子目录后缀；
+> 要锁版本时再带 `#标签` 即可。
+
 ### 让 agent 装 / CLI
 
 - **让 agent 装**：`plugin_manager` 工具 `install_bundle`，target 同上；
